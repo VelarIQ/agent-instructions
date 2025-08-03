@@ -21,7 +21,7 @@
 - Features: Multimodal support
 
 ### Weaviate
-- Endpoint: `https://blcrrxlmtoqofluebp5tlw.c0.us-west3.gcp.weaviate.cloud`
+- Endpoint: `${WEAVIATE_URL}`
 - Auth: API key
 - Operations: Vector search, CRUD, batch import
 
@@ -52,7 +52,7 @@
 ## Webhook Endpoints
 
 ### Incoming Webhooks
-- Base URL: `http://167.71.180.39:5678/webhook/`
+- Base URL: `http://${N8N_URL}/webhook/`
 - Test endpoint: `/webhook-test/[workflow-id]`
 - Production: `/webhook/[workflow-id]`
 

@@ -1,8 +1,8 @@
 {
   "infrastructure": {
-    "domains": ["velariq.ai", "quantiumiq.ai"],
+    "domains": ["${DOMAIN_PRIMARY}", "${DOMAIN_SECONDARY}"],
     "n8n_url": "${N8N_URL}",
-    "postgres": "postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}",
+    "postgres": "postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}",
     "redis": "${REDIS_HOST}:${REDIS_PORT}",
     "weaviate": "${WEAVIATE_URL}"
   },

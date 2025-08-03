@@ -145,10 +145,10 @@ Routes requests to appropriate AI model based on:
 - All other service keys in environment
 
 ### Endpoints
-- N8N: `http://167.71.180.39:5678`
-- PostgreSQL: `165.227.116.69:5432`
-- Redis: `134.209.173.59:6379`
-- Weaviate: `https://blcrrxlmtoqofluebp5tlw.c0.us-west3.gcp.weaviate.cloud`
+- N8N: `${N8N_URL}`
+- PostgreSQL: `${DB_HOST}:${DB_PORT}`
+- Redis: `${REDIS_HOST}:${REDIS_PORT}`
+- Weaviate: `${WEAVIATE_URL}`
 
 ## Quick Start
 

@@ -1,4 +1,103 @@
 {
-  "429": "Rate limit - add delay node",
-  "401": "Invalid API key - check credentials"
+  "429": {
+    "error": "Rate limit exceeded",
+    "solution": "Add delay node with exponential backoff",
+    "prevention": "Implement token bucket rate limiting",
+    "services": {
+      "openai": "Wait 60s, max 10k tokens/min",
+      "anthropic": "Check x-ratelimit-reset header",
+      "slack": "1 req/sec per webhook"
+    }
+  },
+  "401": {
+    "error": "Invalid API key or unauthorized",
+    "solution": "Verify credentials in environment variables",
+    "prevention": "Test all keys on workflow start",
+    "check_keys": [
+      "sk-proj-",
+      "sk-ant-",
+      "Bearer",
+      "xoxb-"
+    ]
+  },
+  "403": {
+    "error": "Forbidden - insufficient permissions",
+    "solution": "Check OAuth scopes and user permissions",
+    "prevention": "Request minimum required scopes"
+  },
+  "404": {
+    "error": "Resource not found",
+    "solution": "Verify endpoint URL and resource ID",
+    "prevention": "Validate IDs before API calls"
+  },
+  "422": {
+    "error": "Unprocessable entity - validation failed",
+    "solution": "Check request body schema",
+    "prevention": "Use JSON schema validation node"
+  },
+  "500": {
+    "error": "Internal server error",
+    "solution": "Retry with exponential backoff",
+    "prevention": "Add circuit breaker pattern",
+    "retry_strategy": {
+      "attempts": 3,
+      "initial_delay": 1000,
+      "multiplier": 2
+    }
+  },
+  "503": {
+    "error": "Service unavailable",
+    "solution": "Switch to backup service",
+    "prevention": "Monitor service health",
+    "fallbacks": {
+      "openai": "anthropic",
+      "primary_db": "read_replica",
+      "main_api": "cached_response"
+    }
+  },
+  "ECONNREFUSED": {
+    "error": "Connection refused",
+    "solution": "Check service is running and accessible",
+    "prevention": "Health check before workflow"
+  },
+  "ETIMEDOUT": {
+    "error": "Request timeout",
+    "solution": "Increase timeout or optimize query",
+    "prevention": "Set appropriate timeouts",
+    "defaults": {
+      "api_calls": 30000,
+      "database": 60000,
+      "webhooks": 10000
+    }
+  },
+  "ENOTFOUND": {
+    "error": "DNS lookup failed",
+    "solution": "Verify hostname/URL",
+    "prevention": "Use IP addresses for critical services"
+  },
+  "JSON_PARSE_ERROR": {
+    "error": "Invalid JSON response",
+    "solution": "Add try-catch with fallback parsing",
+    "prevention": "Validate Content-Type header"
+  },
+  "WEBHOOK_SIGNATURE_INVALID": {
+    "error": "Webhook signature verification failed",
+    "solution": "Check secret key and signature algorithm",
+    "prevention": "Log raw body for debugging"
+  },
+  "DATABASE_CONNECTION_ERROR": {
+    "error": "Cannot connect to database",
+    "solution": "Check connection string and network",
+    "prevention": "Use connection pooling"
+  },
+  "MEMORY_LIMIT_EXCEEDED": {
+    "error": "Workflow exceeded memory limit",
+    "solution": "Process data in smaller batches",
+    "prevention": "Stream large datasets"
+  },
+  "DUPLICATE_KEY_ERROR": {
+    "error": "Unique constraint violation",
+    "solution": "Use upsert or check existence first",
+    "prevention": "Add unique checks before insert"
+  }
 }

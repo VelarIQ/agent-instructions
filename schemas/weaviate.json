@@ -1,23 +1,195 @@
 {
   "classes": [
     {
-      "class": "Workflow",
+      "class": "WorkflowTemplate",
+      "description": "N8N workflow templates and patterns",
+      "vectorizer": "text2vec-openai",
+      "moduleConfig": {
+        "text2vec-openai": {
+          "model": "text-embedding-ada-002",
+          "type": "text"
+        }
+      },
       "properties": [
-        {"name": "name", "dataType": ["string"]},
-        {"name": "description", "dataType": ["text"]},
-        {"name": "category", "dataType": ["string"]},
-        {"name": "nodes", "dataType": ["string[]"]},
-        {"name": "performance_metrics", "dataType": ["object"]},
-        {"name": "use_cases", "dataType": ["text"]}
+        {
+          "name": "name",
+          "dataType": ["text"],
+          "description": "Template name"
+        },
+        {
+          "name": "description",
+          "dataType": ["text"],
+          "description": "Template description"
+        },
+        {
+          "name": "category",
+          "dataType": ["text"],
+          "description": "Template category"
+        },
+        {
+          "name": "workflow_json",
+          "dataType": ["text"],
+          "description": "N8N workflow JSON"
+        },
+        {
+          "name": "tags",
+          "dataType": ["text[]"],
+          "description": "Template tags"
+        },
+        {
+          "name": "use_count",
+          "dataType": ["int"],
+          "description": "Number of times used"
+        },
+        {
+          "name": "created_at",
+          "dataType": ["date"],
+          "description": "Creation timestamp"
+        }
       ]
     },
     {
-      "class": "Pattern",
+      "class": "KnowledgeArticle",
+      "description": "Knowledge base articles",
+      "vectorizer": "text2vec-openai",
+      "moduleConfig": {
+        "text2vec-openai": {
+          "model": "text-embedding-ada-002",
+          "type": "text"
+        }
+      },
       "properties": [
-        {"name": "pattern_type", "dataType": ["string"]},
-        {"name": "implementation", "dataType": ["text"]},
-        {"name": "when_to_use", "dataType": ["text"]},
-        {"name": "example_workflows", "dataType": ["string[]"]}
+        {
+          "name": "title",
+          "dataType": ["text"],
+          "description": "Article title"
+        },
+        {
+          "name": "content",
+          "dataType": ["text"],
+          "description": "Article content"
+        },
+        {
+          "name": "knowledge_base",
+          "dataType": ["text"],
+          "description": "Source knowledge base"
+        },
+        {
+          "name": "category",
+          "dataType": ["text"],
+          "description": "Article category"
+        },
+        {
+          "name": "tags",
+          "dataType": ["text[]"],
+          "description": "Article tags"
+        },
+        {
+          "name": "relevance_score",
+          "dataType": ["number"],
+          "description": "Article relevance score"
+        },
+        {
+          "name": "last_updated",
+          "dataType": ["date"],
+          "description": "Last update timestamp"
+        }
+      ]
+    },
+    {
+      "class": "ErrorPattern",
+      "description": "Common error patterns and solutions",
+      "vectorizer": "text2vec-openai",
+      "moduleConfig": {
+        "text2vec-openai": {
+          "model": "text-embedding-ada-002",
+          "type": "text"
+        }
+      },
+      "properties": [
+        {
+          "name": "error_type",
+          "dataType": ["text"],
+          "description": "Type of error"
+        },
+        {
+          "name": "error_message",
+          "dataType": ["text"],
+          "description": "Error message pattern"
+        },
+        {
+          "name": "solution",
+          "dataType": ["text"],
+          "description": "Recommended solution"
+        },
+        {
+          "name": "root_cause",
+          "dataType": ["text"],
+          "description": "Root cause analysis"
+        },
+        {
+          "name": "prevention",
+          "dataType": ["text"],
+          "description": "Prevention strategies"
+        },
+        {
+          "name": "occurrence_count",
+          "dataType": ["int"],
+          "description": "Number of occurrences"
+        },
+        {
+          "name": "last_seen",
+          "dataType": ["date"],
+          "description": "Last occurrence timestamp"
+        }
+      ]
+    },
+    {
+      "class": "AIPrompt",
+      "description": "Effective AI prompts library",
+      "vectorizer": "text2vec-openai",
+      "moduleConfig": {
+        "text2vec-openai": {
+          "model": "text-embedding-ada-002",
+          "type": "text"
+        }
+      },
+      "properties": [
+        {
+          "name": "name",
+          "dataType": ["text"],
+          "description": "Prompt name"
+        },
+        {
+          "name": "prompt_text",
+          "dataType": ["text"],
+          "description": "The actual prompt"
+        },
+        {
+          "name": "ai_model",
+          "dataType": ["text"],
+          "description": "Target AI model"
+        },
+        {
+          "name": "use_case",
+          "dataType": ["text"],
+          "description": "Primary use case"
+        },
+        {
+          "name": "parameters",
+          "dataType": ["text"],
+          "description": "Configurable parameters"
+        },
+        {
+          "name": "effectiveness_score",
+          "dataType": ["number"],
+          "description": "Effectiveness rating"
+        },
+        {
+          "name": "usage_count",
+          "dataType": ["int"],
+          "description": "Times used"
+        }
       ]
     }
   ]

@@ -1,173 +1,32 @@
 {
-  "webhook-to-database": {
-    "nodes": ["webhook", "data_validation", "postgres", "error_handler"],
-    "use_case": "Save form submissions or API data",
-    "config": {
-      "webhook": {"authentication": "header_auth"},
-      "validation": {"schema_check": true},
-      "error_handling": {"retry": 3, "alert_on_fail": true}
-    }
-  },
-  "scheduled-ai-report": {
-    "nodes": ["schedule", "http_request", "openai", "formatter", "gmail"],
-    "use_case": "Daily/weekly AI-generated reports",
-    "config": {
-      "schedule": {"cron": "0 9 * * *"},
-      "ai_model": "gpt-4",
-      "temperature": 0.3
-    }
-  },
-  "email-to-task": {
-    "nodes": ["gmail_trigger", "openai", "filter", "clickup", "slack"],
-    "use_case": "Convert emails to tasks with AI categorization",
-    "config": {
-      "ai_analysis": ["urgency", "category", "action_items"],
-      "notification": "on_high_priority"
-    }
-  },
-  "data-enrichment-pipeline": {
-    "nodes": ["webhook", "http_request", "merge", "transform", "postgres"],
-    "use_case": "Enrich incoming data with external APIs",
-    "parallel": true,
-    "error_handling": "continue_on_fail"
-  },
-  "multi-ai-consensus": {
-    "nodes": ["trigger", "openai", "anthropic", "google_ai", "merge", "majority_vote"],
-    "use_case": "Get consensus from multiple AI models",
-    "config": {
-      "voting_threshold": 0.66,
-      "models": {
-        "openai": "gpt-4",
-        "anthropic": "claude-3-opus",
-        "google": "gemini-pro"
+  "workflow_patterns": {
+    "ai_mesh": {
+      "description": "Multi-AI orchestration pattern",
+      "use_cases": ["Complex reasoning", "Redundancy", "Best-of-breed selection"],
+      "implementation": {
+        "router_node": "Evaluates request and selects optimal AI",
+        "parallel_processing": "Query multiple AIs simultaneously",
+        "response_aggregation": "Combine and validate responses",
+        "fallback_chain": ["primary_ai", "secondary_ai", "fallback_ai"]
       }
-    }
-  },
-  "document-processing": {
-    "nodes": ["google_drive_trigger", "pdf_extract", "openai", "formatter", "sheets"],
-    "use_case": "Extract and analyze document content",
-    "supported_formats": ["pdf", "docx", "xlsx"]
-  },
-  "api-monitoring": {
-    "nodes": ["schedule", "http_request", "compare", "if", "slack", "pagerduty"],
-    "use_case": "Monitor API health and alert on issues",
-    "config": {
-      "check_interval": "*/5 * * * *",
-      "timeout": 5000,
-      "alert_threshold": 3
-    }
-  },
-  "customer-feedback-loop": {
-    "nodes": ["typeform", "sentiment_analysis", "categorize", "airtable", "slack", "if", "zendesk"],
-    "use_case": "Process feedback and create tickets for negative sentiment",
-    "config": {
-      "sentiment_threshold": -0.5,
-      "auto_ticket": true
-    }
-  },
-  "data-sync-bidirectional": {
-    "nodes": ["webhook", "postgres", "transform", "http_request", "error_handler", "log"],
-    "use_case": "Keep two systems in sync",
-    "config": {
-      "conflict_resolution": "last_write_wins",
-      "sync_fields": ["id", "name", "status", "updated_at"]
-    }
-  },
-  "batch-processing": {
-    "nodes": ["schedule", "postgres", "split_batches", "parallel_process", "merge", "update"],
-    "use_case": "Process large datasets in chunks",
-    "config": {
-      "batch_size": 100,
-      "parallel_executions": 5,
-      "timeout_per_batch": 30000
-    }
-  },
-  "intelligent-routing": {
-    "nodes": ["webhook", "openai", "switch", "multiple_endpoints", "response_merger"],
-    "use_case": "AI-powered request routing",
-    "config": {
-      "routes": {
-        "technical": "engineering_slack",
-        "billing": "finance_system",
-        "general": "support_ticket"
+    },
+    "self_healing": {
+      "description": "Automatic error recovery pattern",
+      "components": {
+        "error_classifier": "Categorizes errors for appropriate handling",
+        "retry_logic": "Exponential backoff with jitter",
+        "circuit_breaker": "Prevents cascade failures",
+        "health_checks": "Proactive service monitoring"
       }
-    }
-  },
-  "error-recovery-cascade": {
-    "nodes": ["trigger", "main_process", "error_catch", "fallback_1", "fallback_2", "manual_review"],
-    "use_case": "Multi-level error recovery",
-    "config": {
-      "max_retries": 3,
-      "backoff_multiplier": 2,
-      "final_action": "create_manual_task"
-    }
-  },
-  "real-time-dashboard": {
-    "nodes": ["websocket", "data_transform", "aggregate", "cache", "sse_endpoint"],
-    "use_case": "Live data dashboard updates",
-    "config": {
-      "update_frequency": 1000,
-      "aggregation_window": 60000
-    }
-  },
-  "compliance-audit-trail": {
-    "nodes": ["trigger", "hash_data", "postgres", "immutable_log", "encrypt", "s3"],
-    "use_case": "Create tamper-proof audit logs",
-    "config": {
-      "hash_algorithm": "sha256",
-      "encryption": "aes-256",
-      "retention_days": 2555
-    }
-  },
-  "ml-preprocessing": {
-    "nodes": ["data_source", "clean", "normalize", "feature_engineering", "split", "output"],
-    "use_case": "Prepare data for ML models",
-    "config": {
-      "normalization": "min_max",
-      "split_ratio": [0.7, 0.2, 0.1],
-      "handle_missing": "interpolate"
-    }
-  },
-  "webhook-validator": {
-    "nodes": ["webhook", "signature_verify", "schema_validate", "process", "respond"],
-    "use_case": "Secure webhook with validation",
-    "config": {
-      "signature_header": "x-webhook-signature",
-      "hmac_algorithm": "sha256"
-    }
-  },
-  "content-moderation": {
-    "nodes": ["input", "openai_moderation", "custom_rules", "if", "action", "log"],
-    "use_case": "Filter inappropriate content",
-    "config": {
-      "categories": ["toxic", "spam", "pii"],
-      "action_on_flag": "quarantine"
-    }
-  },
-  "etl-transform": {
-    "nodes": ["sftp", "csv_parse", "transform", "validate", "deduplicate", "warehouse"],
-    "use_case": "Extract, transform, load data pipeline",
-    "config": {
-      "delimiter": ",",
-      "encoding": "utf-8",
-      "duplicate_key": "email"
-    }
-  },
-  "notification-fanout": {
-    "nodes": ["trigger", "user_preferences", "split", "email", "sms", "push", "slack"],
-    "use_case": "Send notifications to user's preferred channels",
-    "config": {
-      "respect_quiet_hours": true,
-      "fallback_channel": "email"
-    }
-  },
-  "api-composition": {
-    "nodes": ["request", "parallel_apis", "transform_responses", "merge", "cache", "respond"],
-    "use_case": "Combine multiple APIs into one",
-    "config": {
-      "cache_ttl": 300,
-      "timeout": 10000,
-      "partial_response_ok": true
+    },
+    "batch_processing": {
+      "description": "Large dataset handling",
+      "strategies": {
+        "chunking": "Process data in manageable pieces",
+        "parallel_execution": "Concurrent processing paths",
+        "checkpoint_recovery": "Resume from last successful state",
+        "resource_management": "Memory and rate limit awareness"
+      }
     }
   }
 }

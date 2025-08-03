@@ -1,0 +1,33 @@
+{
+  "infrastructure": {
+    "domains": ["velariq.ai", "quantiumiq.ai"],
+    "n8n_url": "${N8N_URL}",
+    "postgres": "postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}",
+    "redis": "${REDIS_HOST}:${REDIS_PORT}",
+    "weaviate": "${WEAVIATE_URL}"
+  },
+  "services": {
+    "knowledge_bases": [
+      "knowledge-base-startradingnow",
+      "knowledge-base-twobrain"
+    ],
+    "ai_models": [
+      "gpt-4",
+      "claude-3",
+      "gemini-pro",
+      "grok",
+      "perplexity"
+    ],
+    "communication": [
+      "slack",
+      "sendgrid",
+      "social_apis"
+    ]
+  },
+  "deployment": {
+    "platform": "digital_ocean",
+    "monitoring": "datadog",
+    "logging": "do_logs",
+    "backups": "do_spaces"
+  }
+}

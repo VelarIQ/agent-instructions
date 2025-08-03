@@ -1,0 +1,24 @@
+{
+  "classes": [
+    {
+      "class": "Workflow",
+      "properties": [
+        {"name": "name", "dataType": ["string"]},
+        {"name": "description", "dataType": ["text"]},
+        {"name": "category", "dataType": ["string"]},
+        {"name": "nodes", "dataType": ["string[]"]},
+        {"name": "performance_metrics", "dataType": ["object"]},
+        {"name": "use_cases", "dataType": ["text"]}
+      ]
+    },
+    {
+      "class": "Pattern",
+      "properties": [
+        {"name": "pattern_type", "dataType": ["string"]},
+        {"name": "implementation", "dataType": ["text"]},
+        {"name": "when_to_use", "dataType": ["text"]},
+        {"name": "example_workflows", "dataType": ["string[]"]}
+      ]
+    }
+  ]
+}

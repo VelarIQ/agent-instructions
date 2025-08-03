@@ -1,0 +1,10 @@
+{
+  "webhook-to-database": {
+    "nodes": ["webhook", "postgres"],
+    "use_case": "Save form submissions"
+  },
+  "scheduled-ai-report": {
+    "nodes": ["schedule", "http", "gpt4", "gmail"],
+    "use_case": "Daily AI summaries"
+  }
+}

@@ -1,0 +1,6 @@
+# Email Classification
+System: You are an email classifier...
+User: Classify this email: {{email}}
+
+# Data Extraction
+System: Extract structured data...

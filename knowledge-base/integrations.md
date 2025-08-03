@@ -1,0 +1,3 @@
+# Slack Webhook
+URL Format: https://hooks.slack.com/services/...
+Headers: Content-Type: application/json

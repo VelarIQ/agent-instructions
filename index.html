@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>VelarIQ - AI-Powered Enterprise Workflow Automation</title>
+   <style>
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+
+       body {
+           font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+           background: #0a0a0a;
+           color: #fff;
+           overflow: hidden;
+           height: 100vh;
+       }
+
+       .gradient-text {
+           background: linear-gradient(135deg, #2196F3 0%, #4CAF50 50%, #00BCD4 100%);
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+           background-clip: text;
+       }
+
+       .office-scene {
+           position: relative;
+           width: 100%;
+           height: 100vh;
+           background: 
+               radial-gradient(ellipse at center, rgba(33,150,243,0.1) 0%, transparent 50%),
+               linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           perspective: 1000px;
+       }
+
+       .office-desk {
+           position: absolute;
+           bottom: 10%;
+           width: 600px;
+           height: 100px;
+           background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+           border-top: 2px solid rgba(255,255,255,0.1);
+           transform: rotateX(45deg) translateZ(-50px);
+           box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+       }
+
+       .header {
+           position: absolute;
+           top: 3rem;
+           left: 50%;
+           transform: translateX(-50%);
+           text-align: center;
+           z-index: 10;
+       }
+
+       .logo {
+           width: 60px;
+           height: 60px;
+           background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTI1IDUwTDQwIDIwTDU1IDUwIiBzdHJva2U9IiMyMTk2RjMiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxjaXJjbGUgY3g9IjQwIiBjeT0iMjAiIHI9IjQiIGZpbGw9IiM0Q0FGNTAiLz4KPGNpcmNsZSBjeD0iNTUiIGN5PSI1MCIgcj0iNCIgZmlsbD0iIzAwQkNENyIvPgo8Y2lyY2xlIGN4PSIyNSIgY3k9IjUwIiByPSI0IiBmaWxsPSIjMjE5NkYzIi8+Cjwvc3ZnPg==') no-repeat center;
+           background-size: contain;
+           margin: 0 auto 1rem;
+       }
+
+       h1 {
+           font-size: 3rem;
+           font-weight: 200;
+           letter-spacing: -0.02em;
+       }
+
+       .agent-container {
+           position: relative;
+           width: 400px;
+           height: 500px;
+           background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+           border: 1px solid rgba(255,255,255,0.1);
+           border-radius: 20px;
+           box-shadow: 
+               0 0 100px rgba(33,150,243,0.3),
+               0 20px 60px rgba(0,0,0,0.5);
+           overflow: hidden;
+           transform: translateZ(0);
+       }
+
+       .agent-glow {
+           position: absolute;
+           top: -50%;
+           left: -50%;
+           width: 200%;
+           height: 200%;
+           background: radial-gradient(circle, rgba(33,150,243,0.2) 0%, transparent 70%);
+           animation: rotate 20s linear infinite;
+       }
+
+       @keyframes rotate {
+           from { transform: rotate(0deg); }
+           to { transform: rotate(360deg); }
+       }
+
+       .agent-header {
+           background: linear-gradient(135deg, rgba(33,150,243,0.2) 0%, rgba(0,188,212,0.2) 100%);
+           padding: 1rem;
+           text-align: center;
+           border-bottom: 1px solid rgba(255,255,255,0.1);
+       }
+
+       .agent-title {
+           font-size: 1.1rem;
+           font-weight: 400;
+           color: rgba(255,255,255,0.9);
+       }
+
+       .agent-iframe {
+           width: 100%;
+           height: calc(100% - 60px);
+           border: none;
+           background: #0a0a0a;
+       }
+
+       .cta-buttons {
+           position: absolute;
+           bottom: 3rem;
+           left: 50%;
+           transform: translateX(-50%);
+           display: flex;
+           gap: 1.5rem;
+           z-index: 10;
+       }
+
+       .btn {
+           padding: 0.8rem 2rem;
+           border-radius: 50px;
+           font-size: 1rem;
+           font-weight: 500;
+           text-decoration: none;
+           transition: all 0.3s;
+           cursor: pointer;
+           border: none;
+           text-transform: uppercase;
+           letter-spacing: 0.05em;
+           backdrop-filter: blur(10px);
+       }
+
+       .btn-primary {
+           background: linear-gradient(135deg, #2196F3, #00BCD4);
+           color: white;
+       }
+
+       .btn-primary:hover {
+           transform: translateY(-2px);
+           box-shadow: 0 10px 30px rgba(33,150,243,0.4);
+       }
+
+       .btn-secondary {
+           background: rgba(255,255,255,0.1);
+           color: white;
+           border: 1px solid rgba(255,255,255,0.2);
+       }
+
+       .btn-secondary:hover {
+           background: rgba(255,255,255,0.15);
+           border-color: #2196F3;
+       }
+
+       .intro-text {
+           position: absolute;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           text-align: center;
+           z-index: 100;
+           pointer-events: none;
+           opacity: 1;
+           transition: opacity 1s;
+       }
+
+       .intro-text.hide {
+           opacity: 0;
+       }
+
+       .typing-indicator {
+           display: inline-block;
+           width: 8px;
+           height: 20px;
+           background: #2196F3;
+           animation: blink 1s infinite;
+           vertical-align: text-bottom;
+           margin-left: 2px;
+       }
+
+       @keyframes blink {
+           0%, 50% { opacity: 1; }
+           51%, 100% { opacity: 0; }
+       }
+
+       @media (max-width: 768px) {
+           .agent-container {
+               width: 90%;
+               max-width: 350px;
+               height: 70vh;
+           }
+           
+           h1 { font-size: 2rem; }
+           
+           .cta-buttons {
+               flex-direction: column;
+               width: 90%;
+               max-width: 300px;
+           }
+       }
+   </style>
+</head>
+<body>
+   <div class="office-scene">
+       <div class="header">
+           <div class="logo"></div>
+           <h1><span class="gradient-text">VELAR</span>IQ</h1>
+       </div>
+
+       <div class="agent-container">
+           <div class="agent-glow"></div>
+           <div class="agent-header">
+               <div class="agent-title">VelarIQ Intelligence Assistant</div>
+           </div>
+           <iframe 
+               class="agent-iframe"
+               src="https://q.velariq.ai"
+               title="VelarIQ Assistant"
+               id="agentFrame"
+           ></iframe>
+       </div>
+
+       <div class="intro-text" id="introText">
+           <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Welcome to Your AI Workflow Architect<span class="typing-indicator"></span></h2>
+           <p style="color: rgba(255,255,255,0.6);">Ask me anything about enterprise automation</p>
+       </div>
+
+       <div class="office-desk"></div>
+
+       <div class="cta-buttons">
+           <a href="pricing.html" class="btn btn-primary">View Pricing</a>
+           <a href="https://github.com/VelarIQ/agent-instructions" target="_blank" class="btn btn-secondary">Documentation</a>
+       </div>
+   </div>
+
+   <script>
+       // Hide intro text after 5 seconds
+       setTimeout(() => {
+           document.getElementById('introText').classList.add('hide');
+       }, 5000);
+
+       // Add subtle parallax effect
+       document.addEventListener('mousemove', (e) => {
+           const x = (e.clientX / window.innerWidth - 0.5) * 20;
+           const y = (e.clientY / window.innerHeight - 0.5) * 20;
+           
+           document.querySelector('.agent-container').style.transform = 
+               `perspective(1000px) rotateY(${x * 0.1}deg) rotateX(${-y * 0.1}deg)`;
+       });
+   </script>
+</body>
+</html>
